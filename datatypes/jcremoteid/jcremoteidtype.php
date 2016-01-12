@@ -1,25 +1,20 @@
 <?php
 
-
-
 class jcRemoteIDType extends eZDataType
 {
 
     const DATA_TYPE_STRING = "jcremoteid";
 
-    /*!
-      Constructeur
-    */
     function __construct()
     {
         $this->eZDataType( self::DATA_TYPE_STRING, "Remote ID" );
     }
 
-    /*!
-     Validates input on content object level
-     \return eZInputValidator::STATE_ACCEPTED or eZInputValidator::STATE_INVALID if
-             the values are accepted or not
-    */
+    /**
+     * Validates input on content object level
+     * @return eZInputValidator::STATE_ACCEPTED or eZInputValidator::STATE_INVALID if
+     *        the values are accepted or not
+     */
     function validateObjectAttributeHTTPInput( $http, $base, $contentObjectAttribute )
     {
         $returnCode = eZInputValidator::STATE_ACCEPTED;
@@ -67,10 +62,10 @@ class jcRemoteIDType extends eZDataType
     }
 
 
-    /*!
-     Fetches all variables from the object
-     \return true if fetching of class attributes are successfull, false if not
-    */
+    /**
+     * Fetches all variables from the object
+     * @return true if fetching of class attributes are successfull, false if not
+     */
     function fetchObjectAttributeHTTPInput( $http, $base, $contentObjectAttribute )
     {
         //We store the
@@ -120,9 +115,9 @@ class jcRemoteIDType extends eZDataType
         return true;
     }
 
-    /*!
-     Returns the content.
-    */
+    /**
+     * Returns the content.
+     */
     function objectAttributeContent( $contentObjectAttribute )
     {
 
@@ -167,17 +162,17 @@ class jcRemoteIDType extends eZDataType
 
 
 
-    /*!
-     Returns the value as it will be shown if this attribute is used in the object name pattern.
-    */
+    /**
+     * Returns the value as it will be shown if this attribute is used in the object name pattern.
+     */
     function title( $contentObjectAttribute, $name = null )
     {
         return "";
     }
 
-    /*!
-     \return true if the datatype can be indexed
-    */
+    /**
+     * @return true if the datatype can be indexed
+     */
     function isIndexable()
     {
         return false;
@@ -192,10 +187,10 @@ class jcRemoteIDType extends eZDataType
         {
 
             $mainTab = explode('|',$data_text);
-            
+
             if ($mainTab[0]!='0' && trim($mainTab[0])!='' )
             {
-                
+
                 $object = $contentObjectAttribute->attribute('object');
                 $object->setAttribute('remote_id',$mainTab[0]);
                 $object->store();
@@ -215,7 +210,7 @@ class jcRemoteIDType extends eZDataType
             {
                 if (count($publishedNodes)==1 && isset($nodeRemoteIDList['NN']))
                 {
-                    //New object only one node, not managing yet multiple assignement at create time
+                    // New object only one node, not managing yet multiple assignement at create time
                     $node = $publishedNodes[0];
                     $node->setAttribute('remote_id',$nodeRemoteIDList['NN']);
                     $node->store();
@@ -247,8 +242,8 @@ class jcRemoteIDType extends eZDataType
 
         if ($objectAttribute->attribute('contentobject_id')!=$originalContentObjectAttribute->attribute('contentobject_id'));
         {
-            //this is a copy of an original object
-            //we should remove datas from data_text
+            // this is a copy of an original object
+            // we should remove datas from data_text
             $objectAttribute->setAttribute('data_text', '');
         }
     }
@@ -257,4 +252,4 @@ class jcRemoteIDType extends eZDataType
 }
 
 eZDataType::register( jcRemoteIDType::DATA_TYPE_STRING, "jcRemoteIDType" );
-?>
+

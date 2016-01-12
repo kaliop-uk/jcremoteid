@@ -7,12 +7,14 @@ $node   = false;
 $tpl = eZTemplate::factory();
 
 
+/// @todo send more errors in case node/object does not exist, etc...
+
 if ($node = eZContentObjectTreeNode::fetch($NodeID))
 {
 
     if ($Module->currentAction()=='UpdateRemoteID')
     {
-        //tests values
+        // test values
         $inputObjectName = 'jcremoteid_object';
         $inputNodeListName = 'jcremoteid_node_list';
 
@@ -21,9 +23,9 @@ if ($node = eZContentObjectTreeNode::fetch($NodeID))
         $object = $node->attribute('object');
 
         if ($http->hasPostVariable($inputObjectName)
-                && jcRemoteID::isValidObjectRemoteID($http->postVariable($inputObjectName),$object->attribute('id'),$errors))
+                && jcRemoteID::isValidObjectRemoteID($http->postVariable($inputObjectName), $object->attribute('id'), $errors))
         {
-            $object->setAttribute('remote_id',$http->postVariable($inputObjectName));
+            $object->setAttribute('remote_id', $http->postVariable($inputObjectName));
             $object->store();
         }
 
@@ -34,23 +36,23 @@ if ($node = eZContentObjectTreeNode::fetch($NodeID))
 
             foreach ($object->attribute('assigned_nodes') as $node_item)
             {
-                $node_item_id=$node_item->attribute('node_id');
+                $node_item_id = $node_item->attribute('node_id');
                 if (isset($remoteIDNodeList[$node_item_id])
                         && jcRemoteID::isValidNodeRemoteID($remoteIDNodeList[$node_item_id], $node_item_id,$errors))
                 {
                     $node_item->setAttribute('remote_id',$remoteIDNodeList[$node_item_id]);
                     $node_item->store();
-                    
-                    if ($node_item_id==$NodeID)
+
+                    if ($node_item_id == $NodeID)
                     {
                         //update $node for template if errors
-                        $node=$node_item;
+                        $node = $node_item;
                     }
                 }
             }
         }
 
-        //If ok -> send data
+        // If ok -> send data
         if (empty($errors))
         {
             //Clear cache of this object
@@ -66,12 +68,9 @@ if ($node = eZContentObjectTreeNode::fetch($NodeID))
     }
 
 } else {
-    //Wrong parameters    
+    //Wrong parameters
 }
 
 $tpl->setVariable('node',$node);
 $tpl->setVariable('error_list',$errors);
 $Result['content']=$tpl->fetch('design:remoteid/update.tpl');
-
-
-?>

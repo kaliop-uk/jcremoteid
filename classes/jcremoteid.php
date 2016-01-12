@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Utility class for jcRemoteID extension
  * Remote ID validation
@@ -22,7 +23,7 @@ class jcRemoteID
             $errors[]=ezpI18n::tr('remoteid/update','Remote ID cannot be blank');
             return false;
         }
-        
+
         //Not allowed for practical reason only : "|;:"
         //$errors[]=ezpI18n::tr('remoteid/update','unallowed characters : "| ; :"');
         return true;
@@ -38,9 +39,9 @@ class jcRemoteID
     static public function isValidObjectRemoteID($remoteID, $currentObjectID=false, &$errors=array())
     {
 
-        
+
         if (!self::isValidRemoteIDText($remoteID,$errors))
-        {                
+        {
             return false;
         }
 
@@ -53,7 +54,7 @@ class jcRemoteID
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -85,7 +86,7 @@ class jcRemoteID
                     $existingNodeIDList[]=$node['node_id'];
                 }
             }
-            
+
 
             if (!in_array($currentNodeID,$existingNodeIDList))
             {
@@ -94,11 +95,8 @@ class jcRemoteID
                 return false;
             }
         }
-        
+
         return true;
     }
 
-
 }
-
-?>

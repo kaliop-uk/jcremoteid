@@ -4,7 +4,6 @@
 <!--
 menuArray['ClassMenu']['elements']['classmenu-jcremoteid'] = new Array();
 menuArray['ClassMenu']['elements']['classmenu-jcremoteid']['url'] = {"/remoteid/update/%nodeID%"|ezurl};
-
 // -->
 </script>
 

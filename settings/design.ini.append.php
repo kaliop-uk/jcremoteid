@@ -2,6 +2,3 @@
 
 [ExtensionSettings]
 DesignExtensions[]=jcremoteid
-
-*/ ?>
-
