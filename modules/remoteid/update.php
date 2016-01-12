@@ -5,7 +5,7 @@ $NodeID = $Params['NodeID'];
 $node   = false;
 
 $tpl = eZTemplate::factory();
-
+$errors = array();
 
 /// @todo send more errors in case node/object does not exist, etc...
 
@@ -19,7 +19,6 @@ if ($node = eZContentObjectTreeNode::fetch($NodeID))
         $inputNodeListName = 'jcremoteid_node_list';
 
         $http = new eZHTTPTool();
-        $errors = array();
         $object = $node->attribute('object');
 
         if ($http->hasPostVariable($inputObjectName)
@@ -71,6 +70,6 @@ if ($node = eZContentObjectTreeNode::fetch($NodeID))
     //Wrong parameters
 }
 
-$tpl->setVariable('node',$node);
-$tpl->setVariable('error_list',$errors);
+$tpl->setVariable('node', $node);
+$tpl->setVariable('error_list', $errors);
 $Result['content']=$tpl->fetch('design:remoteid/update.tpl');
