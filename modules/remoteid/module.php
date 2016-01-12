@@ -2,9 +2,17 @@
 
 $Module = array( 'name' => 'RemoteID' );
 
-$ViewList = array();
-$ViewList['update']= array( 'script'=>'update.php',
-                            'params'=>array( 'NodeID' ),
-                            'single_post_actions'=>
-                                array( 'UpdateRemoteID'
-                                    => 'UpdateRemoteID' ) );
+$ViewList = array(
+    'update' => array(
+        'script'=>'update.php',
+        'params'=>array( 'NodeID' ),
+        'functions' => array( 'set' ),
+        'single_post_actions'=> array(
+            'UpdateRemoteID' => 'UpdateRemoteID'
+        )
+    )
+);
+
+$FunctionList = array(
+    'set' => array()
+);

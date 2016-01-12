@@ -1,0 +1,3 @@
+- allow setting permission with limitations (such as content/edit can)
+- better/more error messages
+- add translations

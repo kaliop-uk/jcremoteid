@@ -12,6 +12,11 @@ override.ini (not documented but override are working on remote id condition).
 The main interest of this is to be able to use the same remote id in multiple environments (dev, test, production) for
 nodes or objects (whereas object id or node id are auto increment).
 
+## Installation
+
+- download the extension, activate it, clear caches
+- to allow setting remote ids via the module, give to the users you want a policy to RemoteID/set
+
 
 ## Using Remote ID in fetches
 
