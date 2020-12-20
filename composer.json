@@ -14,5 +14,11 @@
   },
   "extra": {
     "ezpublish-legacy-extension-name": "jcremoteid"
-  }
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/tanoconsulting"
+    }
+  ]
 }
